@@ -1,0 +1,17 @@
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d "{\"username\":\"testuser\",\"password\":\"testpass\"}"
+{"message":"User registered successfully"}
+
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d "{\"username\":\"testuser\",\"password\":\"testpass\"}"
+{"message":"User already exists"}
+
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d "{}"
+{"message":"Username and password are required"}
+
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d "{\"username\":\"testuser\",\"password\":\"\"}"
+{"message":"Username and password are required"}
+
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d "{\"username\":\"\",\"password\":\"testpass\"}"
+{"message":"Username and password are required"}
+
+curl -X POST http://localhost:5000/register -H "Content-Type: application/json" -d "{\"username\":\"user1234\",\"password\":\"pass1234\"}"
+{"message":"User registered successfully"}

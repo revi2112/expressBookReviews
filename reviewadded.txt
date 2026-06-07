@@ -1,0 +1,22 @@
+curl -X PUT "http://localhost:5000/customer/auth/review/1" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzgwODM3NjYxLCJleHAiOjE3ODA4NDEyNjF9.A1aAuKK3KzHNMMnGcuNlnN0KVfftCseHCIiPP-5tsWc" -d "{\"review\":\"Great book!\"}"
+{"message":"Review added/updated successfully","reviews":{"testuser":"Great book!"}}
+
+curl localhost:5000/review/1
+{"testuser":"Great book!"}
+
+curl -X PUT "http://localhost:5000/customer/auth/review/1" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzgwODM3NjYxLCJleHAiOjE3ODA4NDEyNjF9.A1aAuKK3KzHNMMnGcuNlnN0KVfftCseHCIiPP-5tsWc" -d "{\"review\":\"Great book! Updating review to add that it was a nice personally relataable experience!\"}"
+{"message":"Review added/updated successfully","reviews":{"testuser":"Great book! Updating review to add that it was a nice personally relataable experience!"}}
+
+curl localhost:5000/review/1
+{"testuser":"Great book! Updating review to add that it was a nice personally relataable experience!"}
+
+curl -X PUT "http://localhost:5000/customer/auth/review/1" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0IiwiaWF0IjoxNzgwODM3Njg3LCJleHAiOjE3ODA4NDEyODd9.r5ryeQdf9Tyg3lQna1jWct6XO4sHontFuwtPKCguhN4" -d "{\"review\":\"Another review from another user here!\"}"
+{"message":"Review added/updated successfully","reviews":{"testuser":"Great book! Updating review to add that it was a nice personally relataable experience!","user1234":"Another review from another user here!"}}
+
+curl localhost:5000/review/1
+{"testuser":"Great book! Updating review to add that it was a nice personally relataable experience!","user1234":"Another review from another user here!"}
+
+REM # One hour later
+
+curl -X PUT "http://localhost:5000/customer/auth/review/1" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0IiwiaWF0IjoxNzgwODM3Njg3LCJleHAiOjE3ODA4NDEyODd9.r5ryeQdf9Tyg3lQna1jWct6XO4sHontFuwtPKCguhN4" -d "{\"review\":\"Great book!\"}"
+{"message":"Invalid or expired token"}

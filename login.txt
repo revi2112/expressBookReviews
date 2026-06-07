@@ -1,0 +1,5 @@
+curl -X POST http://localhost:5000/customer/login -H "Content-Type: application/json" -d "{\"username\":\"testuser\",\"password\":\"testpass\"}"
+{"message":"User logged in successfully","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWF0IjoxNzgwODM3NjYxLCJleHAiOjE3ODA4NDEyNjF9.A1aAuKK3KzHNMMnGcuNlnN0KVfftCseHCIiPP-5tsWc"}
+
+curl -X POST http://localhost:5000/customer/login -H "Content-Type: application/json" -d "{\"username\":\"user1234\",\"password\":\"pass1234\"}"
+{"message":"User logged in successfully","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjM0IiwiaWF0IjoxNzgwODM3Njg3LCJleHAiOjE3ODA4NDEyODd9.r5ryeQdf9Tyg3lQna1jWct6XO4sHontFuwtPKCguhN4"}
