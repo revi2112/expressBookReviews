@@ -3,15 +3,31 @@ const jwt = require('jsonwebtoken');
 const session = require('express-session')
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
+require('dotenv').config();
+
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
+app.use("/customer",session({secret:process.env.JWT_SECRET, resave: true, saveUninitialized: true}))
 
 app.use("/customer/auth/*", function auth(req,res,next){
-//Write the authenication mechanism here
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(403).json({ message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+        return res.status(403).json({ message: "Invalid or expired token" });
+        }
+        req.user = decoded;
+        next();
+    });
 });
  
 const PORT =5000;
